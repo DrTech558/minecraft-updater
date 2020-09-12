@@ -2,8 +2,7 @@
 #script to download the paper version from minecraft
 #To use this script go to the directy where the paper.jar file is located. And ./update_paper.sh minecraft version eg. (./update_paper.sh 1.16.1) 
 # You can also you cronjob to automate this process. 
-#
-# -end 
+
 
 if [ $(dpkg-query -W -f='${Status}' wget 2>/dev/null | grep -c "ok installed") -eq 0 ];
 then

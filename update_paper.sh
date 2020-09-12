@@ -21,4 +21,4 @@ General options:
 [[ "${1}" == "help" ]] && echo "$help_text" && exit 0
 
 rm paper*.jar
-wget https://papermc.io/api/v1/paper/$1/latest/download -O paperclip.jar
+wget https://papermc.io/api/v1/paper/$1/latest/download -O server.jar

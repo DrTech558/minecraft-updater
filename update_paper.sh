@@ -14,8 +14,8 @@ fi
 #Help text for help
 help_text="Usage: update_paper.sh version
 General options:
-  help                         Display this help and exit
-  version                  	 Select minecraft version eg. 1.16.1"
+  help                       Display this help and exit
+  version                  	 Select minecraft version eg. 1.16.1
 # HELP TEXT PLEASE
 [[ "$#" -eq 0 ]] && echo "$help_text" && exit 0
 [[ "${1}" == "help" ]] && echo "$help_text" && exit 0

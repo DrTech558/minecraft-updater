@@ -1,5 +1,5 @@
 #! /bin/bash
-#script to download the paper version from minecraft
+#script to download the paper version from minecraft.
 #To use this script go to the directy where the paper.jar file is located. And ./update_paper.sh minecraft version eg. (./update_paper.sh 1.16.1) 
 # You can also you cronjob to automate this process. 
 

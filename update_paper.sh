@@ -20,7 +20,14 @@ General options:
 [[ "$#" -eq 0 ]] && echo "$help_text" && exit 0
 [[ "${1}" == "help" ]] && echo "$help_text" && exit 0
 
-rm paper*.jar
+
+FILE=server.jar
+if [ -f "$FILE" ]; then
+    echo "$FILE exists. Removing old .jar"
+    rm $FILE
+else 
+    echo "$FILE does not exist. Downloading now"
+fi
 
 #download requested version of paper
 wget https://papermc.io/api/v1/paper/$1/latest/download -O server.jar

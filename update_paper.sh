@@ -20,6 +20,16 @@ General options:
 [[ "$#" -eq 0 ]] && echo "$help_text" && exit 0
 [[ "${1}" == "help" ]] && echo "$help_text" && exit 0
 
+#get latest mc version
+mkdir -p ~/var/lib/mc
+MC_VERSIONS_CACHE="$HOME/var/lib/mc/version_manifest.json"
+RELEASE_JSON="$HOME/var/lib/mc/_release.json"
+SNAPSHOT_JSON="$HOME/var/lib/mc/_snapshot.json"
+
+curl -sS https://launchermeta.mojang.com/mc/game/version_manifest.json > $MC_VERSIONS_CACHE
+# cat $MC_VERSIONS_CACHE | jq
+LATEST_SNAPSHOT=$(cat $MC_VERSIONS_CACHE | jq -r '{latest: .latest.snapshot} | .[]')
+LATEST_RELEASE=$(cat $MC_VERSIONS_CACHE | jq -r '{latest: .latest.release} | .[]')
 
 FILE=server.jar
 if [ -f "$FILE" ]; then
@@ -30,4 +40,12 @@ else
 fi
 
 #download requested version of paper
-wget https://papermc.io/api/v1/paper/$1/latest/download -O server.jar
+
+if [ ! -z $1 ]
+then
+     echo "using $1"
+     wget https://papermc.io/api/v1/paper/$1/latest/download -O server.jar
+else
+     echo " version was not given. Using $LATEST_RELEASE"
+     wget https://papermc.io/api/v1/paper/$LATEST_RELEASE/latest/download -O server.jar
+fi

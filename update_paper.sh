@@ -17,7 +17,6 @@ General options:
   help                       Display this help and exit
   version                  	 Select minecraft version eg. 1.16.3"
 # HELP TEXT PLEASE
-[[ "$#" -eq 0 ]] && echo "$help_text" && exit 0
 [[ "${1}" == "help" ]] && echo "$help_text" && exit 0
 
 #get latest mc version
@@ -31,7 +30,7 @@ curl -sS https://launchermeta.mojang.com/mc/game/version_manifest.json > $MC_VER
 LATEST_SNAPSHOT=$(cat $MC_VERSIONS_CACHE | jq -r '{latest: .latest.snapshot} | .[]')
 LATEST_RELEASE=$(cat $MC_VERSIONS_CACHE | jq -r '{latest: .latest.release} | .[]')
 
-FILE=server.jar
+FILE=minecraft_server.jar
 if [ -f "$FILE" ]; then
     echo "$FILE exists. Removing old .jar"
     rm $FILE
@@ -44,8 +43,8 @@ fi
 if [ ! -z $1 ]
 then
      echo "using $1"
-     wget https://papermc.io/api/v1/paper/$1/latest/download -O server.jar
+     wget https://papermc.io/api/v1/paper/$1/latest/download -O minecraft_server.jar
 else
      echo " version was not given. Using $LATEST_RELEASE"
-     wget https://papermc.io/api/v1/paper/$LATEST_RELEASE/latest/download -O server.jar
+     wget https://papermc.io/api/v1/paper/$LATEST_RELEASE/latest/download -O minecraft_server.jar
 fi
